@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    </body>
+    <script>
+        var person = {
+            name: "张三"
+        };
+
+        Object.defineProperty(person, "address", {
+            value : '向阳路一号',
+            writable : true,
+            configurable : true
+        });
+
+        // 禁止扩展，不能添加新的属性
+        Object.preventExtensions(person);
+        person.age = 20;
+        console.log(person);
+        console.log(person.age);
+
+        person.name = "王五";
+        console.log(person.name);
+
+        Object.defineProperty(person, "name", {
+           writable : false
+        });
+
+        person.name = "李四";
+        console.log(person.name);
+
+        // 密封 会调用 preventExtensions 还会标记configurable为false
+        Object.seal(person);
+
+        try {
+            Object.defineProperty(person, "name", {
+                writable : true
+            })
+        } catch ( e ) {
+            console.log(e);
+        }
+
+        person.address = "向阳路二号";
+        console.log(person.address);
+
+        // 冻结 调用 seal并将writable置为false
+        Object.freeze(person);
+
+        person.address = "向阳路三号";
+
+        console.log(person.address);
+    </script>
+</html>

@@ -1,0 +1,108 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+</body>
+<script>
+    var person = {};
+    person.a = "a";
+    console.log(person);
+    // 1. 默认情况下，writable =false,confirgurable= false，不能修改值，不能重新配置
+    Object.defineProperty(person, "name", {
+        value : '张三'
+    });
+    console.log(person.name);
+    person.name = "李四";
+    console.log(person.name);
+
+    try {
+        console.log("-------modify value with configurable is false ------")
+        Object.defineProperty(person, "name", {
+            value : '李四'
+        });
+
+        console.log(person.name);
+    } catch ( e ) {
+        console.log(e);
+    }
+
+    // 2.writable=true,值可以修改，重新定义时，也可以把writable修改为false
+    Object.defineProperty(person, "age", {
+        value : 10,
+        writable : true,
+    });
+    console.log(person.age);
+    person.age = 20;
+    console.log(person.age);
+
+    Object.defineProperty(person, "age", {
+        value : 30,
+        writable : false
+    });
+
+    console.log(person.age);
+    person.age = 20;
+    console.log(person.age);
+
+    // 3.writable = false，configurable =false，不能重新定义，不能修改值，也不能将writable修改为true
+    Object.defineProperty(person, "sex", {
+        value : "M",
+        writable : false
+    });
+
+    console.log(person.sex);
+    person.sex = "F";
+    console.log(person.sex);
+
+    try {
+        console.log("------modify writable from false to true with configurable is false ,it fail with exception");
+        Object.defineProperty(person, "sex", {
+            value : "F",
+            writable : true
+        });
+    } catch ( e ) {
+        console.log(e);
+    }
+
+    console.log(person.sex);
+
+    // 4.writable = false, configurable = true，可以重新定义、可以将writable 由false修改为true,可以delete 添加的属性
+    Object.defineProperty(person, "address", {
+        value : "向阳路一号",
+        writable: false,
+        configurable: true
+    });
+    console.log(person.address);
+    person.address = "向阳路二号";
+    console.log(person.address);
+
+    Object.defineProperty(person, "address", {
+        value: "向阳路三号",
+        writable: true,
+        configurable: true
+    });
+    console.log(person.address);
+    person.address = "向阳路二号";
+    console.log(person.address);
+    delete person.address;
+    console.log(person.address);
+
+    let tmpIdnum = "1234";
+    Object.defineProperty(person, "idnum", {
+        get() {
+            return tmpIdnum;
+        },
+        set(v) {
+            return tmpIdnum = v;
+        }
+    });
+
+    console.log(person);
+    console.log(person.idnum);
+    person.idnum = "67890";
+    console.log(person.idnum);
+
+    // 冻结
+</script>
+</html>

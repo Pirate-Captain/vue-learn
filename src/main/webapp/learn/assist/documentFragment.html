@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <ol id="olV"></ol>
+    </body>
+    <script>
+        var li = null, fragment = document.createDocumentFragment();
+        for ( var i = 0; i < 500; i++ ) {
+            li = document.createElement("li");
+            li.appendChild(document.createTextNode("Item" + i));
+            fragment.appendChild(li);
+        }
+        document.getElementById("olV").appendChild(fragment);
+    </script>
+</html>
