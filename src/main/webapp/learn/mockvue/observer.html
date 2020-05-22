@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+</body>
+<script>
+    function defineReactive(data, key, value) {
+        observer(value);
+        Object.defineProperty(data, key, {
+            configurable : true,
+            enumerable : true,
+            get : function () {
+                return value;
+            },
+            set : function (newVal) {
+                value = newVal;
+                console.log("监听到属性：" + key + "已经变更，新值为：" + newVal);
+            }
+        });
+    }
+    
+    function observer(data) {
+        if ( !data || typeof data != 'object' ) {
+            return;
+        }
+        Object.keys(data).forEach(function (key) {
+            defineReactive(data, key, data[key]);
+        });
+    }
+
+    var person = {
+        name: "张三",
+        age: 12
+    };
+
+    observer(person);
+
+    person.name = "李四";
+</script>
+</html>
