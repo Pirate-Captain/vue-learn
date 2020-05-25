@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+</body>
+<script>
+    var person = {
+        name : "张三",
+        age  : 20,
+        say : function(welcomeWord, message) {
+            console.log(this.name + "，age：" + this.age + ",welcomeword：" + welcomeWord + "，message：" + message);
+        }
+    };
+
+    var chinese = {
+        name : "李四",
+        age : 30
+    };
+
+    person.say.apply(chinese, ["你好", "欢迎"]);
+</script>
+</html>
