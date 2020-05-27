@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in arrayItems">{{index}}-{{item}}</li>
+    </ul>
+    <p>
+    <ul>
+        <li v-for="(value, name, index) in objs">{{index}}-{{name}}：{{value}}</li>
+    </ul>
+</div>
+</body>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            arrayItems: ['apple', 'banana', 'orange'],
+            objs : {
+                name : '张三',
+                age : 20,
+                sex : 'male'
+            }
+        }
+    });
+</script>
+</html>
