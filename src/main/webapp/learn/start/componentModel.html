@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component-a v-model="name"></component-a>
+    <p>{{name}}</p>
+</div>
+</body>
+<script>
+    var componentA = {
+        props : ['name'],
+        model : {
+            prop : name,
+            event : 'input'
+        },
+        template : `
+        <input v-bind:value="name" v-on:input="$emit('input', $event.target.value)">
+        `
+    };
+    var appVue = new Vue({
+        el : '#app',
+        components : {
+            'component-a' : componentA
+        },
+        data : {
+            name : '张三'
+        }
+    });
+</script>
+</html>

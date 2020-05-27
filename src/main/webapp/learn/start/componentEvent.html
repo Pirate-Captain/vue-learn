@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component-a name="wangwu"></component-a>
+    <component-a v-bind:name="name" v-on:click-me="clickButton"></component-a>
+</div>
+</body>
+<script>
+    var componentA = {
+        props : ['name'],
+        template : `
+        <button v-on:click="showMessage(name)">点击</button>
+        `,
+        methods : {
+            showMessage : function (name) {
+                this.$emit("click-me", "子组件被点击了");
+                alert(name + " you click me");
+            }
+        }
+    };
+    let vue = new Vue({
+        el : '#app',
+        components : {
+            'component-a' : componentA
+        },
+        data : {
+            name : '张三',
+            user : {
+                name : '李四'
+            }
+        },
+        methods : {
+            clickButton :function () {
+                console.log(arguments);
+            }
+        }
+    });
+</script>
+</html>
