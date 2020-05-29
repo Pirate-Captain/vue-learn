@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component-slot>
+        <a>我是个链接</a>
+    </component-slot>
+    <component-slot></component-slot>
+</div>
+</body>
+<script>
+    var componentSlot = {
+        template : `
+        <div>
+            <p>我在slot之前</p>
+            <slot>父类组件没定义啥东西，我自动显示</slot>
+        </div>
+        `
+    };
+
+    var vue = new Vue({
+        el : '#app',
+        components : {
+            'component-slot' : componentSlot
+        }
+    });
+</script>
+</html>

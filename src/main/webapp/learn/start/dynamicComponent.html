@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component v-bind:is="currentComponent"></component>
+</div>
+</body>
+<script>
+    var componentA = {
+        template : '<div>compA</div>'
+    };
+    var componentB = {
+        template : '<div>compB</div>'
+    };
+    var componentC = {
+        template : '<div>compC</div>'
+    };
+
+    var vue = new Vue({
+        el : '#app',
+        components : {
+            'comp-a' : componentA,
+            'comp-b' : componentB,
+            'comp-c' : componentC
+        },
+        data : {
+            currentComponent : 'comp-a'
+        }
+    });
+</script>
+</html>

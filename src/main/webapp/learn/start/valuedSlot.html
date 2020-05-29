@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <value-slot>
+        <template v-slot:user="userMessage">
+            {{userMessage.user}}
+        </template>
+    </value-slot>
+</div>
+</body>
+<script>
+    var valuedSlot = {
+        template : `
+        <div>
+            <p>
+                <slot name="user" v-bind:user="message"></slot>
+            </p>
+        </div>
+        `,
+        data() {
+            return {
+                message : "张三"
+            }
+        }
+    };
+    var vue = new Vue({
+        el : '#app',
+        components : {
+            'value-slot' : valuedSlot
+        }
+    });
+</script>
+</html>

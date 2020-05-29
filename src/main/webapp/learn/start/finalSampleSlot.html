@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <todo-list v-bind:todos="todos">
+        <template v-slot="{todo}">
+            {{todo.text}} - lll
+        </template>
+    </todo-list>
+    <todo-list v-bind:todos="todos1">
+        <template v-slot="{todo}"></template>
+    </todo-list>
+</div>
+</body>
+<script>
+    var todoList = {
+        props : ['todos'],
+        template : `
+            <ul>
+                <li v-for="todo in todos" v-bind:key="todo.id">
+                    <slot v-bind:todo="todo">{{todo.text}}</slot>
+                </li>
+            </ul>
+        `
+    };
+    var vue = new Vue({
+        el : '#app',
+        components : {
+            'todo-list' : todoList
+        },
+        data : {
+            todos : [
+                {'id' : '12dfadfadd', 'text' : 'li-张三'},
+                {'id' : '9dfadfadfd', 'text' : 'li-李四'},
+                {'id' : '0ijfadfadg', 'text' : 'li-王五'}
+            ],
+            todos1 : [
+                {'id' : '12dfaddfdfadd', 'text' : 'li-张三1'},
+                {'id' : '9dfadfaddddfd', 'text' : 'li-李四1'},
+                {'id' : '0ijfaddddfadg', 'text' : 'li-王五1'}
+            ]
+        }
+    });
+</script>
+</html>

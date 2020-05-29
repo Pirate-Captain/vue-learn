@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component-named>
+        <template v-slot:header>
+            头部
+        </template>
+        <template v-slot:body>
+            内容
+        </template>
+        <template v-slot:footer>
+            底部
+        </template>
+        <p>默认的地方</p>
+    </component-named>
+</div>
+</body>
+<script>
+    var componentNamed = {
+        template: `
+            <div>
+                <slot name="header">I am header</slot>
+                <slot name="body">I am body</slot>
+                <slot></slot>
+                <slot name="footer"></slot>
+                <slot></slot>
+            </div>
+        `
+    };
+    var vue = new Vue({
+        el : '#app',
+        components : {
+            'component-named' : componentNamed
+        }
+    });
+</script>
+</html>
